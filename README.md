@@ -6,12 +6,11 @@ Ce projet est une application front-end pour la gestion de tâches. Elle permet 
 
 ## Démo
 
-Vous pouvez accéder à la version en ligne de l'application ici : 
-[to-do-list-task-app.onrender.com](https://to-do-list-task-app.onrender.com)
+Vous pouvez accéder à la version en ligne de l'application ici : Sur <mark>Render</mark>: [to-do-list-task-app.onrender.com](https://to-do-list-task-app.onrender.com)
 
 ou bien ici
 
-[to-do-list-task-app-lia.vercel.app](https://to-do-list-task-app-lia.vercel.app/)
+Sur <mark>Vercel</mark>:[to-do-list-task-app-lia.vercel.app](https://to-do-list-task-app-lia.vercel.app/)
 
 ## Fonctionnalités
 
