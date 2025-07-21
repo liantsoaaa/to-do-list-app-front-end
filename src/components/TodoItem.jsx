@@ -1,28 +1,39 @@
 import React from 'react';
+import { motion } from "framer-motion";
+import { Checkbox, IconButton, Typography } from "@material-tailwind/react";
+import { FaTrash } from "react-icons/fa";
 
 const TodoItem = ({ todo, onUpdate, onDelete }) => {
     return (
-        <div className="flex items-center justify-between p-4 border-b border-gray-100 hover:bg-blue-50 transition-colors">
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, x: -50 }}
+            layout
+            className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 mb-2 shadow-sm hover:shadow-md transition-shadow"
+        >
             <div className="flex items-center space-x-3">
-                <input
-                    type="checkbox"
+                <Checkbox
                     checked={todo.completed}
                     onChange={() => onUpdate(todo.id, { ...todo, completed: !todo.completed })}
-                    className="h-5 w-5 text-primary rounded-full focus:ring-0"
+                    ripple={false}
+                    className="h-5 w-5 rounded-full border-gray-700/20 bg-black transition-all hover:scale-105 hover:before:opacity-0"
                 />
-                <span className={`text-lg ${todo.completed ? 'line-through text-gray-400' : 'text-dark'}`}>
+                <Typography
+                    variant="paragraph"
+                    className={`text-lg font-normal ${todo.completed ? 'line-through text-gray-500' : 'text-gray-800'}`}
+                >
                     {todo.title}
-                </span>
+                </Typography>
             </div>
-            <button
+            <IconButton
+                variant="text"
                 onClick={() => onDelete(todo.id)}
-                className="p-2 text-secondary hover:bg-red-50 rounded-full transition-colors"
+                className="rounded-full text-gray-300 hover:bg-red-50 hover:text-red-500"
             >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
-                </svg>
-            </button>
-        </div>
+                <FaTrash className="h-5 w-5" />
+            </IconButton>
+        </motion.div>
     );
 };
 
