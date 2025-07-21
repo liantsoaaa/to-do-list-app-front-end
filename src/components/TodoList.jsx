@@ -8,18 +8,20 @@ import { FaClipboardList } from "react-icons/fa";
 const TodoList = () => {
     const [todos, setTodos] = useState([]);
 
+    const apiUrl = 'https://to-do-list-backend-fastapi.onrender.com' || import.meta.env.VITE_API_URL
+
     useEffect(() => {
         fetchTodos();
     }, []);
 
     const fetchTodos = async () => {
-        const response = await fetch('http://localhost:8000/todos');
+        const response = await fetch(`${apiUrl}/todos`);
         const data = await response.json();
         setTodos(data);
     };
 
     const addTodo = async (title) => {
-        const response = await fetch('http://localhost:8000/todos', {
+        const response = await fetch(`${apiUrl}/todos`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ title })
@@ -29,7 +31,7 @@ const TodoList = () => {
     };
 
     const updateTodo = async (id, updatedTodo) => {
-        await fetch(`http://localhost:8000/todos/${id}`, {
+        await fetch(`${apiUrl}/todos/${id}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(updatedTodo)
@@ -38,7 +40,7 @@ const TodoList = () => {
     };
 
     const deleteTodo = async (id) => {
-        await fetch(`http://localhost:8000/todos/${id}`, { method: 'DELETE' });
+        await fetch(`${apiUrl}/todos/${id}`, { method: 'DELETE' });
         setTodos(todos.filter(todo => todo.id !== id));
     };
 
