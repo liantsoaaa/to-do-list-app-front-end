@@ -20,7 +20,7 @@ const TodoItem = ({ todo, onUpdate, onDelete }) => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, x: -50 }}
             layout
-            className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 mb-2 shadow-sm hover:shadow-md transition-shadow"
+            className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 mb-2 shadow-sm hover:shadow-md transition-shadow"
         >
             <div className="flex items-center space-x-3 w-full">
                 <Checkbox
@@ -53,7 +53,7 @@ const TodoItem = ({ todo, onUpdate, onDelete }) => {
                 ) : (
                     <Typography
                         variant="paragraph"
-                        className={`text-lg font-normal flex-1 ${todo.completed ? 'line-through text-gray-500' : 'text-gray-800'}`}
+                        className={`text-base sm:text-lg font-normal flex-1 break-words ${todo.completed ? 'line-through text-gray-500' : 'text-gray-800'}`}
                     >
                         {todo.title}
                     </Typography>
