@@ -18,7 +18,7 @@ function App() {
       </main>
       
       <footer className="mt-16 text-center text-gray-500 text-sm">
-        © {new Date().getFullYear()} - To Do List App. Created by liantsoaaa
+        © {new Date().getFullYear()} - To Do List App. Created by liantsoaaa.
       </footer>
     </div>
   );

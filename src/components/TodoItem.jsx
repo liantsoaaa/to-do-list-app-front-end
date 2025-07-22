@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from "framer-motion";
-import { Checkbox, IconButton, Typography } from "@material-tailwind/react";
-import { FaTrash } from "react-icons/fa";
+import { Checkbox, IconButton, Typography, Input } from "@material-tailwind/react";
+import { FaTrash, FaEdit, FaSave } from "react-icons/fa";
 
 const TodoItem = ({ todo, onUpdate, onDelete }) => {
+    const [isEditing, setIsEditing] = useState(false);
+    const [editedTitle, setEditedTitle] = useState(todo.title);
+
+    const handleSave = () => {
+        if (editedTitle.trim()) {
+            onUpdate(todo.id, { ...todo, title: editedTitle });
+            setIsEditing(false);
+        }
+    };
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -12,27 +22,58 @@ const TodoItem = ({ todo, onUpdate, onDelete }) => {
             layout
             className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 mb-2 shadow-sm hover:shadow-md transition-shadow"
         >
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-3 w-full">
                 <Checkbox
                     checked={todo.completed}
                     onChange={() => onUpdate(todo.id, { ...todo, completed: !todo.completed })}
                     ripple={false}
                     className="h-5 w-5 rounded-full border-gray-700/20 bg-black transition-all hover:scale-105 hover:before:opacity-0"
                 />
-                <Typography
-                    variant="paragraph"
-                    className={`text-lg font-normal ${todo.completed ? 'line-through text-gray-500' : 'text-gray-800'}`}
-                >
-                    {todo.title}
-                </Typography>
+                
+                {isEditing ? (
+                    <div className="flex flex-1 items-center gap-2">
+                        <Input
+                            value={editedTitle}
+                            onChange={(e) => setEditedTitle(e.target.value)}
+                            className="flex-1"
+                            autoFocus
+                        />
+                        <IconButton
+                            variant="text"
+                            onClick={handleSave}
+                            className="text-green-500 hover:bg-green-50"
+                        >
+                            <FaSave className="h-4 w-4" />
+                        </IconButton>
+                    </div>
+                ) : (
+                    <Typography
+                        variant="paragraph"
+                        className={`text-lg font-normal flex-1 ${todo.completed ? 'line-through text-gray-500' : 'text-gray-800'}`}
+                    >
+                        {todo.title}
+                    </Typography>
+                )}
             </div>
-            <IconButton
-                variant="text"
-                onClick={() => onDelete(todo.id)}
-                className="rounded-full text-gray-300 hover:bg-red-50 hover:text-red-500"
-            >
-                <FaTrash className="h-5 w-5" />
-            </IconButton>
+            
+            <div className="flex space-x-1">
+                {!isEditing && (
+                    <IconButton
+                        variant="text"
+                        onClick={() => setIsEditing(true)}
+                        className="rounded-full text-gray-300 hover:bg-blue-50"
+                    >
+                        <FaEdit className="h-4 w-4" />
+                    </IconButton>
+                )}
+                <IconButton
+                    variant="text"
+                    onClick={() => onDelete(todo.id)}
+                    className="rounded-full text-gray-300 hover:bg-red-50 hover:text-red-500"
+                >
+                    <FaTrash className="h-4 w-4" />
+                </IconButton>
+            </div>
         </motion.div>
     );
 };
