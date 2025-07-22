@@ -8,7 +8,7 @@ import { FaClipboardList } from "react-icons/fa";
 const TodoList = () => {
     const [todos, setTodos] = useState([]);
 
-    const apiUrl = 'https://to-do-list-backend-fastapi.onrender.com' || import.meta.env.VITE_API_URL
+    const apiUrl = 'https://to-do-list-backend-fastapi.onrender.com' || import.meta.env.API_URL
 
     useEffect(() => {
         fetchTodos();
