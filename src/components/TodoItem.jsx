@@ -20,14 +20,14 @@ const TodoItem = ({ todo, onUpdate, onDelete }) => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, x: -50 }}
             layout
-            className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 mb-2 shadow-sm hover:shadow-md transition-shadow"
+            className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:p-4 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 mb-2 shadow-sm hover:shadow-md transition-shadow"
         >
-            <div className="flex items-center space-x-3 w-full">
+            <div className="flex items-center space-x-3 w-full mb-2 sm:mb-0">
                 <Checkbox
                     checked={todo.completed}
                     onChange={() => onUpdate(todo.id, { ...todo, completed: !todo.completed })}
                     ripple={false}
-                    className="h-5 w-5 rounded-full border-gray-700/20 bg-black transition-all hover:scale-105 hover:before:opacity-0"
+                    className="h-4 w-4 sm:h-5 sm:w-5 rounded-full border-gray-700/20 bg-black transition-all hover:scale-105 hover:before:opacity-0"
                 />
                 
                 {isEditing ? (
@@ -36,7 +36,7 @@ const TodoItem = ({ todo, onUpdate, onDelete }) => {
                             value={editedTitle}
                             onChange={(e) => setEditedTitle(e.target.value)}
                             className="flex-1 !border !border-blue-500 bg-sky-200 text-gray-900 
-                                    shadow-sm focus:!border-blue-500 focus:!ring-blue-500"
+                                    shadow-sm focus:!border-blue-500 focus:!ring-blue-500 text-sm sm:text-base"
                             autoFocus
                             containerProps={{
                                 className: "min-w-0",
@@ -45,7 +45,7 @@ const TodoItem = ({ todo, onUpdate, onDelete }) => {
                         <IconButton
                             variant="text"
                             onClick={handleSave}
-                            className="text-green-500 hover:bg-green-50 ml-0"
+                            className="text-green-500 hover:bg-green-50 ml-1 sm:ml-2"
                         >
                             <FaSave className="h-4 w-4" />
                         </IconButton>
@@ -53,14 +53,14 @@ const TodoItem = ({ todo, onUpdate, onDelete }) => {
                 ) : (
                     <Typography
                         variant="paragraph"
-                        className={`text-base sm:text-lg font-normal flex-1 break-words ${todo.completed ? 'line-through text-gray-500' : 'text-gray-800'}`}
+                        className={`text-base sm:text-lg font-normal flex-1 ${todo.completed ? 'line-through text-gray-500' : 'text-gray-800'}`}
                     >
                         {todo.title}
                     </Typography>
                 )}
             </div>
             
-            <div className="flex space-x-2">
+            <div className="flex space-x-2 self-end sm:self-auto">
                 {!isEditing && (
                     <IconButton
                         variant="text"

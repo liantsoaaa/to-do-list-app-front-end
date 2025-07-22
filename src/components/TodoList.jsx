@@ -101,17 +101,17 @@ const TodoList = () => {
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-white rounded-2xl shadow-xl p-6 w-full max-w-4xl mx-auto"
+            className="bg-white rounded-2xl shadow-xl p-4 sm:p-6 w-full max-w-4xl mx-auto"
         >
-            <div className="flex items-center gap-3 mb-8">
-                <div className="bg-gradient-to-r from-primary to-indigo-600 p-3 rounded-xl">
-                    <FaClipboardList className="h-8 w-8 text-white" />
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-6 sm:mb-8">
+                <div className="bg-gradient-to-r from-primary to-indigo-600 p-2 sm:p-3 rounded-xl">
+                    <FaClipboardList className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
                 </div>
                 <div>
-                    <Typography variant="h3" className="text-gray-900">
+                    <Typography variant="h3" className="text-xl sm:text-2xl md:text-3xl text-gray-900">
                         Mes Tâches
                     </Typography>
-                    <Typography variant="small" className="text-gray-600">
+                    <Typography variant="small" className="text-gray-600 text-sm sm:text-base">
                         {todos.length} tâche{todos.length !== 1 ? 's' : ''} au total
                     </Typography>
                 </div>
@@ -119,7 +119,7 @@ const TodoList = () => {
 
             <AddTodo onAdd={addTodo} />
 
-            <div className="mt-6 max-h-[60vh] overflow-y-auto pr-2">
+            <div className="mt-4 sm:mt-6 max-h-[50vh] sm:max-h-[60vh] overflow-y-auto pr-2">
                 <AnimatePresence>
                     {todos.length > 0 ? (
                         todos.map(todo => (
@@ -150,7 +150,7 @@ const TodoList = () => {
                 </AnimatePresence>
             </div>
 
-            <div className="mt-6 pt-4 border-t border-gray-100">
+            <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-gray-100">
                 <div className="flex justify-between items-center">
                     <Typography variant="small" className="text-gray-500">
                         {todos.filter(t => t.completed).length} complétée{todos.filter(t => t.completed).length !== 1 ? 's' : ''}
