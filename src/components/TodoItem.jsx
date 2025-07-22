@@ -35,13 +35,17 @@ const TodoItem = ({ todo, onUpdate, onDelete }) => {
                         <Input
                             value={editedTitle}
                             onChange={(e) => setEditedTitle(e.target.value)}
-                            className="flex-1"
+                            className="flex-1 !border !border-blue-500 bg-sky-200 text-gray-900 
+                                    shadow-sm focus:!border-blue-500 focus:!ring-blue-500"
                             autoFocus
+                            containerProps={{
+                                className: "min-w-0",
+                            }}
                         />
                         <IconButton
                             variant="text"
                             onClick={handleSave}
-                            className="text-green-500 hover:bg-green-50"
+                            className="text-green-500 hover:bg-green-50 ml-0"
                         >
                             <FaSave className="h-4 w-4" />
                         </IconButton>
@@ -56,7 +60,7 @@ const TodoItem = ({ todo, onUpdate, onDelete }) => {
                 )}
             </div>
             
-            <div className="flex space-x-1">
+            <div className="flex space-x-2">
                 {!isEditing && (
                     <IconButton
                         variant="text"
