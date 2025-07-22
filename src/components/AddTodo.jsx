@@ -37,15 +37,17 @@ const AddTodo = ({ onAdd }) => {
                 </div>
                 <Button
                     type="submit"
-                    className="flex items-center gap-2 bg-primary w-full sm:w-auto
-                            shadow-[0_10px_25px_-5px_rgba(59,130,246,0.3),0_8px_10px_-6px_rgba(59,130,246,0.1)]
-                            transform transition-all duration-300 hover:scale-105 hover:shadow-[0_15px_30px_-5px_rgba(59,130,246,0.4),0_10px_15px_-8px_rgba(59,130,246,0.2)] 
-                            mt-2 sm:mt-0 md:text-center"
+                    className="flex items-center justify-center gap-2 bg-primary w-full sm:w-auto
+                                shadow-[0_10px_25px_-5px_rgba(59,130,246,0.3),0_8px_10px_-6px_rgba(59,130,246,0.1)]
+                                transform transition-all duration-300 hover:scale-105 
+                                hover:shadow-[0_15px_30px_-5px_rgba(59,130,246,0.4),0_10px_15px_-8px_rgba(59,130,246,0.2)]
+                                mt-2 sm:mt-0 text-center"
                     size="md"
                 >
                     <FaPlusCircle className="h-4 w-4 sm:h-5 sm:w-5" />
                     <span className="text-sm sm:text-base">Ajouter</span>
                 </Button>
+
             </div>
         </form>
     );
