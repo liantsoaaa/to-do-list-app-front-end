@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from "framer-motion";
 import { Checkbox, IconButton, Typography, Input } from "@material-tailwind/react";
-import { FaTrash, FaEdit, FaSave } from "react-icons/fa";
+import { FaTrash, FaEdit, FaSave, FaTimes } from "react-icons/fa";
 
 const TodoItem = ({ todo, onUpdate, onDelete }) => {
     const [isEditing, setIsEditing] = useState(false);
@@ -12,6 +12,11 @@ const TodoItem = ({ todo, onUpdate, onDelete }) => {
             onUpdate(todo.id, { ...todo, title: editedTitle });
             setIsEditing(false);
         }
+    };
+
+    const handleCancel = () => {
+        setEditedTitle(todo.title);
+        setIsEditing(false);
     };
 
     return (
@@ -31,25 +36,16 @@ const TodoItem = ({ todo, onUpdate, onDelete }) => {
                 />
                 
                 {isEditing ? (
-                    <div className="flex flex-1 items-center gap-2">
-                        <Input
-                            value={editedTitle}
-                            onChange={(e) => setEditedTitle(e.target.value)}
-                            className="flex-1 !border !border-blue-500 bg-sky-200 text-gray-900 
-                                    shadow-sm focus:!border-blue-500 focus:!ring-blue-500 text-sm sm:text-base"
-                            autoFocus
-                            containerProps={{
-                                className: "min-w-0",
-                            }}
-                        />
-                        <IconButton
-                            variant="text"
-                            onClick={handleSave}
-                            className="text-green-500 hover:bg-green-50 ml-1 sm:ml-2"
-                        >
-                            <FaSave className="h-4 w-4" />
-                        </IconButton>
-                    </div>
+                    <Input
+                        value={editedTitle}
+                        onChange={(e) => setEditedTitle(e.target.value)}
+                        className="flex-1 !border !border-blue-500 bg-sky-200 text-gray-900 
+                                shadow-sm focus:!border-blue-500 focus:!ring-blue-500 text-sm sm:text-base"
+                        autoFocus
+                        containerProps={{
+                            className: "min-w-0",
+                        }}
+                    />
                 ) : (
                     <Typography
                         variant="paragraph"
@@ -61,22 +57,41 @@ const TodoItem = ({ todo, onUpdate, onDelete }) => {
             </div>
             
             <div className="flex space-x-2 self-end sm:self-auto">
-                {!isEditing && (
-                    <IconButton
-                        variant="text"
-                        onClick={() => setIsEditing(true)}
-                        className="rounded-full text-gray-300 hover:bg-blue-50"
-                    >
-                        <FaEdit className="h-4 w-4" />
-                    </IconButton>
+                {isEditing ? (
+                    <>
+                        <IconButton
+                            variant="text"
+                            onClick={handleSave}
+                            className="rounded-full text-green-500 hover:bg-green-50"
+                        >
+                            <FaSave className="h-4 w-4" />
+                        </IconButton>
+                        <IconButton
+                            variant="text"
+                            onClick={handleCancel}
+                            className="rounded-full text-gray-500 hover:bg-blue-50"
+                        >
+                            <FaTimes className="h-4 w-4" />
+                        </IconButton>
+                    </>
+                ) : (
+                    <>
+                        <IconButton
+                            variant="text"
+                            onClick={() => setIsEditing(true)}
+                            className="rounded-full text-gray-300 hover:bg-blue-50"
+                        >
+                            <FaEdit className="h-4 w-4" />
+                        </IconButton>
+                        <IconButton
+                            variant="text"
+                            onClick={() => onDelete(todo.id)}
+                            className="rounded-full text-gray-300 hover:bg-red-50 hover:text-red-500"
+                        >
+                            <FaTrash className="h-4 w-4" />
+                        </IconButton>
+                    </>
                 )}
-                <IconButton
-                    variant="text"
-                    onClick={() => onDelete(todo.id)}
-                    className="rounded-full text-gray-300 hover:bg-red-50 hover:text-red-500"
-                >
-                    <FaTrash className="h-4 w-4" />
-                </IconButton>
             </div>
         </motion.div>
     );
